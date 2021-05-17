@@ -11,10 +11,12 @@ import (
     md "github.com/JohannesKaufmann/html-to-markdown"
 )
 
+const DB_NAME = "YOUR_DATABASE_NAME"
+const TABLE_NAME = "YOUR_TABLE_NAME"
+
 //Custom your own column here
 //use sql.NullString for optional value
 type Blog struct {
-    Id string
     Title string
     Slug string
     Body string
@@ -29,19 +31,24 @@ type Blog struct {
 func main() {
 
     //Connect mysql
-    db, err := sqlx.Connect("mysql", "root:root@tcp(127.0.0.1:3306)/hugodb?parseTime=true")
+    db, err := sqlx.Connect("mysql", "root:root@tcp(127.0.0.1:3306)/" + DB_NAME + "?parseTime=true")
     if err != nil {
         panic(err)
     }
     defer db.Close()
 
     //Get all data from DB
+        //default table = blogs
     var blogs []Blog
-    err = db.Select(&blogs, "SELECT * FROM blogs")
+    err = db.Select(&blogs, "SELECT * FROM " + TABLE_NAME)
     if err != nil {
         panic(err.Error()) 
     }
 
+    createMarkdownFiles(blogs)
+}
+
+func createMarkdownFiles(blogs []Blog) {
     for _, blog := range blogs {
 
         // For meta data add double quote
@@ -56,12 +63,12 @@ func main() {
         }
 
         //For possible null values
-        _tags := ""
+        _tags := "\"\""
         if blog.Tags.Valid {
             _tags  = "\"" + blog.Tags.String + "\""
         }
         //For possible null values
-        _featured_image := ""
+        _featured_image := "\"\""
         if blog.Featured_image.Valid  {
             _featured_image = "\"" + blog.Featured_image.String + "\""
         }
@@ -86,7 +93,6 @@ func main() {
           panic(err)
         }
     }   
-
 }
 
 func WriteStringToFile(filepath, s string) error {

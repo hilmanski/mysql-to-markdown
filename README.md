@@ -5,12 +5,18 @@ Go file to helps you convert mysql data to markdown files.
 Example usage: migrating blog posts to SSG (static site generator). After generating markdown files, you can copy paste it to your SSG folder
 
 
-## Run go file
-//create folder named "blogs"
+## How to
+1. create folder named "blogs"
 
-go run main.go
+2. setup your database and table name @DB_NAME and @TABLE_NAME
 
-//it will create all you markdown files inside blogs folder 
+3. Customize your column name at -type Blog struct-
+
+4. Customize your markdown files at func createMarkdownFiles
+
+5. go run main.go
+
+//it will generate all you markdown files inside blogs folder 
 
 ## Feature
 You can convert html format to markdown files
