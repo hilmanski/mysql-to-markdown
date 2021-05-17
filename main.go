@@ -16,10 +16,10 @@ import (
 type Blog struct {
     Id string
     Title string
-	Slug string
-	Body string
+    Slug string
+    Body string
     Excerpt string
-	Tags sql.NullString
+    Tags sql.NullString
     Featured_image sql.NullString
     Published bool
     Markdown bool
