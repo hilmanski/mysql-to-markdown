@@ -2,7 +2,7 @@
 
 Go file to helps you convert mysql data to markdown files.
 
-Example usage: move blog posts to SSG (static site generator). After generating markdown files, you can copy paste it to your SSG folder
+Example usage: migrating blog posts to SSG (static site generator). After generating markdown files, you can copy paste it to your SSG folder
 
 
 ## Run go file
