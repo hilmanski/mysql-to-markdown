@@ -1,7 +1,9 @@
 ## Convert mysql to Markdown
 
-Go file to helps you convert mysql data to markdown.
-My case is I want to move my blog posts to SSG (static site generator). 
+Go file to helps you convert mysql data to markdown files.
+
+Example usage: move blog posts to SSG (static site generator). After generating markdown files, you can copy paste it to your SSG folder
+
 
 ## Run go file
 //create folder named "blogs"
