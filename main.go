@@ -58,9 +58,9 @@ func createMarkdownFiles(blogs []Blog) {
         _description := "\"" + getMetaSubject(blog.Excerpt, blog.Body) + "\""
         _date := "\"" + blog.Created_at + "\""
 
-        _draft := false
+        _draft := true
         if blog.Published == true {
-            _draft = true
+            _draft = false
         }
 
         //For possible null values
