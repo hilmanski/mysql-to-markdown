@@ -11,12 +11,13 @@ import (
     md "github.com/JohannesKaufmann/html-to-markdown"
 )
 
-const DB_NAME = "YOUR_DATABASE_NAME"
+const DB_NAME = "YOUR_DB_NAME"
 const TABLE_NAME = "YOUR_TABLE_NAME"
 
 //Custom your own column here
 //use sql.NullString for optional value
 type Blog struct {
+    Id string
     Title string
     Slug string
     Body string
@@ -55,7 +56,7 @@ func createMarkdownFiles(blogs []Blog) {
         _title := "\"" + blog.Title + "\""
         _slug := "\"" + blog.Slug + "\""
         _description := "\"" + getMetaSubject(blog.Excerpt, blog.Body) + "\""
-        _created_at := "\"" + blog.Created_at + "\""
+        _date := "\"" + blog.Created_at + "\""
 
         _draft := false
         if blog.Published == true {
@@ -82,7 +83,7 @@ func createMarkdownFiles(blogs []Blog) {
                 "title = "+ _title + "\n" +
                 "slug = "+ _slug + "\n" +
                 "description = "+ _description + "\n" +
-                "published_date = "+ _created_at + "\n" +
+                "date = "+ _date + "\n" +
                 "featured_image = "+  _featured_image + "\n" +
                 "tags = "+ _tags + "\n" +
                 "draft = "+ strconv.FormatBool(_draft) + "\n" +
